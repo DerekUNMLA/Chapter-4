@@ -1,0 +1,123 @@
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+  <meta charset="UTF-8">
+  <title>Energy of Life: Concept Map Activity</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      background: #0d9488;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    #instructions {
+      background: #e0f2f1;
+      padding: 0.75rem;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    #workspace {
+      position: relative;
+      width: 100%;
+      height: calc(100vh - 140px);
+      background: #f0f9ff;
+      overflow: hidden;
+    }
+
+    .node {
+      position: absolute;
+      background: #ecfeff;
+      border: 2px solid #06b6d4;
+      border-radius: 8px;
+      padding: 10px;
+      font-weight: bold;
+      cursor: move;
+      user-select: none;
+      min-width: 100px;
+      text-align: center;
+    }
+
+    .label {
+      position: absolute;
+      font-size: 0.8rem;
+      background-color: white;
+      padding: 2px 4px;
+      border: 1px solid #94a3b8;
+      border-radius: 4px;
+      pointer-events: auto;
+      cursor: move;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🔬 Energy of Life: Concept Map</h1>
+  </header>
+
+  <div id="instructions">
+    <strong>Instructions:</strong> Drag concepts and relationship phrases to build your concept map. Use phrases like “fuels,” “requires,” or “catalyzes” to show connections between ideas.
+  </div>
+
+  <div id="workspace">
+    <!-- Concept Nodes -->
+    <div class="node" style="top: 60px; left: 60px;">ATP</div>
+    <div class="node" style="top: 60px; left: 220px;">Enzymes</div>
+    <div class="node" style="top: 200px; left: 60px;">Metabolism</div>
+    <div class="node" style="top: 200px; left: 220px;">Membrane Transport</div>
+    <div class="node" style="top: 350px; left: 60px;">Kinetic Energy</div>
+    <div class="node" style="top: 350px; left: 220px;">Potential Energy</div>
+    <div class="node" style="top: 100px; left: 450px;">PKU</div>
+    <div class="node" style="top: 220px; left: 450px;">Cystic Fibrosis</div>
+    <div class="node" style="top: 340px; left: 450px;">Lactose Intolerance</div>
+    <div class="node" style="top: 430px; left: 150px;">Energy of Life</div>
+    <div class="node" style="top: 60px; left: 650px;">Redox Reactions</div>
+    <div class="node" style="top: 200px; left: 650px;">Homeostasis</div>
+
+    <!-- Relationship Labels -->
+    <div class="label" style="top: 130px; left: 160px;">fuels</div>
+    <div class="label" style="top: 100px; left: 300px;">catalyzes</div>
+    <div class="label" style="top: 160px; left: 550px;">caused by enzyme deficiency</div>
+    <div class="label" style="top: 280px; left: 550px;">faulty transporter</div>
+    <div class="label" style="top: 400px; left: 550px;">missing enzyme</div>
+    <div class="label" style="top: 250px; left: 180px;">includes</div>
+    <div class="label" style="top: 310px; left: 180px;">requires</div>
+    <div class="label" style="top: 420px; left: 200px;">converted to</div>
+  </div>
+
+  <script>
+    const makeDraggable = (selector) => {
+      document.querySelectorAll(selector).forEach(el => {
+        let offsetX, offsetY, isDragging = false;
+
+        el.addEventListener('mousedown', (e) => {
+          isDragging = true;
+          offsetX = e.clientX - el.offsetLeft;
+          offsetY = e.clientY - el.offsetTop;
+        });
+
+        document.addEventListener('mousemove', (e) => {
+          if (isDragging) {
+            el.style.left = `${e.clientX - offsetX}px`;
+            el.style.top = `${e.clientY - offsetY}px`;
+          }
+        });
+
+        document.addEventListener('mouseup', () => {
+          isDragging = false;
+        });
+      });
+    };
+
+    makeDraggable('.node');
+    makeDraggable('.label');
+  </script>
+
+
+
+</body></html>
