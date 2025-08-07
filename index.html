@@ -1,0 +1,170 @@
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+  <meta charset="UTF-8">
+  <title>Explore the Energy of Life</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f0fdf4;
+      color: #1e293b;
+    }
+
+    h1 {
+      text-align: center;
+      color: #0f172a;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: auto;
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .question {
+      background: #e0f2fe;
+      padding: 16px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      border-left: 6px solid #0ea5e9;
+    }
+
+    .question h2 {
+      margin-top: 0;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      margin-top: 5px;
+      border-radius: 8px;
+      padding: 10px;
+      border: 1px solid #cbd5e1;
+      resize: vertical;
+      font-family: inherit;
+    }
+
+    button {
+      margin-top: 12px;
+      padding: 10px 16px;
+      background-color: #0f766e;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #115e59;
+    }
+
+    .concept-terms {
+      margin: 20px 0;
+      padding: 12px;
+      background: #fef9c3;
+      border-left: 6px solid #facc15;
+      border-radius: 10px;
+    }
+
+    .concept-terms strong {
+      color: #92400e;
+    }
+
+    .reflect {
+      background: #f3e8ff;
+      padding: 16px;
+      border-left: 6px solid #a855f7;
+      border-radius: 10px;
+    }
+
+    .output {
+      margin-top: 20px;
+      background: #ecfdf5;
+      padding: 16px;
+      border-radius: 10px;
+      border-left: 6px solid #10b981;
+    }
+
+    @media (max-width: 600px) {
+      textarea {
+        height: 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>⚡ Discover Connections: The Energy of Life</h1>
+
+    <div class="question">
+      <h2>1. What do you already know?</h2>
+      <p>Before we begin, write what you currently understand about how cells use energy and how molecules like ATP and enzymes are involved.</p>
+      <textarea id="priorKnowledge" placeholder="Type your thoughts here..."></textarea>
+    </div>
+
+    <div class="concept-terms">
+      <p><strong>Concept Terms:</strong> Metabolism, Chemical Reactions, Enzymes, Potential Energy, Kinetic Energy, ATP, Concentration Gradient, Active Transport</p>
+      <p>Use these terms to build your own concept map. Think about how they relate to one another in the context of energy use in cells.</p>
+    </div>
+
+    <div class="question">
+      <h2>2. Form Connections</h2>
+      <p>Write a few sentences or bullet points that describe how these terms relate. Use arrows or phrases like “powers,” “is part of,” “is transformed into,” or “drives.”</p>
+      <textarea id="conceptMap" placeholder="Example: Metabolism ➡️ includes Chemical Reactions ➡️ powered by ATP ➡️ produced during Kinetic Energy transformations..."></textarea>
+    </div>
+
+    <div class="question">
+      <h2>3. Apply to a Real-World Example</h2>
+      <p>Choose a real-world example (like exercise, digestion, or hand sanitizer action) and explain how it relates to the concept map you've created.</p>
+      <textarea id="realExample" placeholder="Example: During exercise, muscles use ATP to fuel contraction. Enzymes speed up the breakdown of glucose for energy..."></textarea>
+    </div>
+
+    <div class="reflect">
+      <h2>4. Reflect</h2>
+      <p>How has your understanding of cellular energy changed? What surprised you while exploring these energy-related terms?</p>
+      <textarea id="reflection" placeholder="Write your reflection here..."></textarea>
+    </div>
+
+    <button onclick="generateSummary()">📄 Generate Summary</button>
+
+    <div class="output" id="summary" style="display:none;">
+      <h2>📝 Your Concept Map Summary</h2>
+      <p><strong>What you knew before:</strong></p>
+      <div id="outputPrior"></div>
+      <p><strong>Your connections:</strong></p>
+      <div id="outputMap"></div>
+      <p><strong>Real-world example:</strong></p>
+      <div id="outputExample"></div>
+      <p><strong>Reflection:</strong></p>
+      <div id="outputReflection"></div>
+    </div>
+  </div>
+
+  <script>
+    function generateSummary() {
+      const prior = document.getElementById('priorKnowledge').value.trim();
+      const map = document.getElementById('conceptMap').value.trim();
+      const example = document.getElementById('realExample').value.trim();
+      const reflection = document.getElementById('reflection').value.trim();
+
+      if (!prior && !map && !example && !reflection) {
+        alert("Please fill in at least one section before generating your summary.");
+        return;
+      }
+
+      document.getElementById('outputPrior').textContent = prior || "No response.";
+      document.getElementById('outputMap').textContent = map || "No response.";
+      document.getElementById('outputExample').textContent = example || "No response.";
+      document.getElementById('outputReflection').textContent = reflection || "No response.";
+
+      document.getElementById('summary').style.display = 'block';
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+  </script>
+
+
+</body></html>
